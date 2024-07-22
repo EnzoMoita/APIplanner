@@ -2,6 +2,7 @@ import type { FastifyInstance } from "fastify";
 import type { ZodTypeProvider } from "fastify-type-provider-zod";
 import { z } from 'zod';
 import { prisma } from "../lib/prisma";
+import { ClientError } from "../errors/client-error";
 
 
 
@@ -22,7 +23,7 @@ export async function confirmParticipants(app: FastifyInstance) {
         })
 
         if (!participant) {
-            throw new Error('Participante inexistente')
+            throw new ClientError('Participante inexistente')
             
         }
 

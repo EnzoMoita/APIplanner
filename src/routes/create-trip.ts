@@ -5,6 +5,7 @@ import { prisma } from "../lib/prisma";
 import { getMailClient } from "../lib/mail";
 import nodemailer from 'nodemailer'
 import {dayjs} from '../lib/dayjs'
+import { ClientError } from "../errors/client-error";
 
 
 
@@ -24,11 +25,11 @@ export async function createTrip(app: FastifyInstance) {
         const { destination, starts_at, ends_at, owner_email, owner_name, emails_to_invite } = request.body
 
         if (dayjs(starts_at).isBefore(new Date())){
-            throw new Error('Data invalida para inicio da viagem')
+            throw new ClientError('Data invalida para inicio da viagem')
         }
         
         if (dayjs(ends_at).isBefore(starts_at)){
-            throw new Error('Data invalida para fim da viagem')
+            throw new ClientError('Data invalida para fim da viagem')
         }
 
         

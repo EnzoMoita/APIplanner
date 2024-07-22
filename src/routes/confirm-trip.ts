@@ -5,6 +5,7 @@ import { prisma } from "../lib/prisma";
 import {dayjs} from '../lib/dayjs'
 import { getMailClient } from "../lib/mail";
 import nodemailer from 'nodemailer'
+import { ClientError } from "../errors/client-error";
 
 
 
@@ -32,7 +33,7 @@ export async function confirmTrip(app: FastifyInstance) {
         })
 
         if (!trip) {
-        throw new Error('Viagem inexistente')     
+        throw new ClientError('Viagem inexistente')     
         
         }
         if (trip.is_confirmed) {

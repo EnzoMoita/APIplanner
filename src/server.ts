@@ -13,6 +13,7 @@ import { createInvite } from './routes/create-invite';
 import { updateTrip } from './routes/update-tip';
 import { getTripDetails } from './routes/get-trip-details';
 import { getParticipant } from './routes/get-participant';
+import { env } from './env';
 
 const app = fastify()
 
@@ -36,6 +37,6 @@ app.register(updateTrip)
 app.register(getTripDetails)
 app.register(getParticipant)
 
-app.listen({ port: 3333 }).then(() => {
+app.listen({ port: env.PORT }).then(() => {
     console.log('Server Running in port 3333')
 })
